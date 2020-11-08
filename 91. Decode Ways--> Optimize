@@ -1,0 +1,32 @@
+class Solution {
+    public int numDecodings(String s) {
+        int index=0;
+          int arr[] = new int[s.length()+1];
+       int ans = numDecodings(s,0,arr);
+      
+        return ans;
+    }
+    public int numDecodings(String s,int index,int arr[])
+    {
+        //is string is empty
+        if(index==s.length())return 1;
+        //is first character is 0
+        if(s.charAt(index)=='0')return 0;
+        //is there is only one character so only way we decode like 
+        //if 'a' then we can decode it as 1 only 
+        if(index==s.length()-1)return 1;
+        if(arr[index]>0)
+        {
+            return arr[index];
+        }
+        
+        int way1 = numDecodings(s,index+1,arr);
+        int way2=0;
+        if(Integer.parseInt(s.substring(index,index+2))<=26)
+        {
+           way2 = numDecodings(s,index+2,arr);
+        }
+arr[index] =  way1+way2;
+        return arr[index];
+    }
+}
